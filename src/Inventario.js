@@ -1,15 +1,41 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
+import React, { Component } from 'react';
+import MostrarInventario from './MostrarInventario.js';
+import ListaInventario from './ListaInventario.js';
 
-render(){
-  return(
-    <div>
-    <center>
-    <p>input type="text" placeholder="Nombre del producto" onChange={this.agregarProducto} onFocus={this.value=""}<p/>
-    <p>input type="text" placeholder="Cantidad" onChange={this.Cantidad} onFocus={this.value=""}<p/>
-    <p>input type="text" placeholder="Sku" onChange={this.} onFocus={this.value=""}<p/>
-    <input type="button" value="Guardar " onClick={this.guardarProducto}/>
-    </center>
-    </div>
-        )
-  }
+
+export default class inventario extends Component{
+	render(){
+		let cadaproducto =[];
+		let boton = [];
+		let termino = null;
+
+		ListaInventario.forEach((inventario) =>{
+				if(inventario.id !== termino) {
+					cadaproducto.push(<MostrarInventario inventario={inventario} key={inventario.sku}/>);
+
+				}
+				termino = inventario.sku;
+			});
+
+
+		return(
+				<center>
+				<div><h3>INVENTARIO</h3>
+				<table className= "App-tablas">
+					<thead>
+						<tr>
+							<th>Nombre</th>
+							<th>Cantidad</th>
+							<th>Sku</th>
+							<th>Precio</th>
+						</tr>
+					</thead>
+					<tbody>
+						{cadaproducto}
+					</tbody>
+				</table>
+				</div>
+				</center>
+			);
+	}
+}

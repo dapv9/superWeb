@@ -9,6 +9,7 @@ import GenerarCodigo from './GenerarCodigo.js';
 import RealizarCompra from './RealizarCompra.js';
 import {ProtoTypes} from 'react';
 import Login from './Login';
+import Menu from './Menu.js';
 
 import ListaInventario from './ListaInventario';
 
