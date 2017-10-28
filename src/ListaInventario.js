@@ -2,7 +2,7 @@ export default [
     {nombre:"Leche", cantidad: "4", sku: "3245235532", precio: "2000"},
     {nombre:"Queso", cantidad: "3", sku: "4637485930", precio: "4000"},
     {nombre:"Salchichas", cantidad: "10", sku: "4637284950", precio: "3500"},
-    {nombre:"Gaseosa", cantidad: "20", sku: "4637284950", precio: "6000"},
+    {nombre:"Gaseosa", cantidad: "20", sku: "4637284121", precio: "6000"},
     {nombre:"Pan perro", cantidad: "11", sku: "4638295043", precio: "3000"},
     {nombre:"Pan tajado", cantidad: "2", sku: "4637295849", precio: "3500"},
     {nombre:"De todito", cantidad: "40", sku: "3526483028", precio: "2000"},
