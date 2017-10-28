@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-</input>
 export default class Login extends Component {
     render(){
       return(
