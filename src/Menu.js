@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import Inventario from './Inventario.js';
+import Codigos from './Codigos.js';
 import Login from './Login.js';
 import RealizarCompra from './RealizarCompra.js';
 import AgregarInventario from './VendedorAgregarInventario.js';
@@ -26,6 +27,7 @@ const Menu = () => (
             <li><Link to="/">Inicio</Link></li>
             <li><Link to="/Login"> Ingresar</Link></li>
             <li><Link to="/Inventario"> Ver Inventario</Link></li>
+            <li><Link to="/Codigos"> Ver Codigos</Link></li>
             <li><Link to="/AgregarProducto">Agregar Producto</Link></li>
             <li><Link to="/AgregarInventario">Agregar Inventario</Link></li>
             <li><Link to="/GenerarCodigo">Generar Codigo</Link></li>
@@ -37,6 +39,7 @@ const Menu = () => (
       <Route exact path="/" component={App}/>
       <Route path="/Login" component={Login}/>
       <Route path="/Inventario" component={Inventario}/>
+      <Route path="/Codigos" component={Codigos}/>
       <Route path="/AgregarProducto" component={AgregarProducto}/>
       <Route path="/AgregarInventario" component={AgregarInventario}/>
       <Route path="/GenerarCodigo" component={GenerarCodigo}/>
