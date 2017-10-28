@@ -1,17 +1,18 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 
-
+</input>
 export default class Login extends Component {
-    render(){</input>
+    render(){
       return(
-        <center>
         <div>
-        <input type="text" placeholder="Usuario" onChange={this.login} onFocus={this.value=""}></input>
-        <input type="text" placeholder="Contraseña" onChange={this.login} onFocus={this.value=""}/>
-        <input type="button" value="Ingresar " onClick={this.login}/>
+          <center>
+            <p><input type="text" placeholder="Usuario" onChange={this.login} onFocus={this.value=""}/></p>
+            <p><input type="text" placeholder="Contraseña" onChange={this.login} onFocus={this.value=""}/></p>
+            <p><input type="button" value="Ingresar " onClick={this.login}/></p>
+          </center>
         </div>
-        </center>
+        
       )
   }
 }
