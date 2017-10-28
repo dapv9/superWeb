@@ -12,7 +12,7 @@ class App extends Component {
         <p className="App-intro">
           <h2>Realizado por:</h2>
           <h4>Sebastian Londoño Alvarez</h4>
-          <h4>David Alexander Parra</h4>
+          <h4>David Alexander Parra Valencia</h4>
           <h4>Johan Alberto Marin Bustamante</h4>
           <h4>Juan David Sanchez</h4>
         </p>
