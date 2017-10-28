@@ -8,9 +8,9 @@ export default class Login extends Component {
         <center>
         <div>
         <input type="text" placeholder="Usuario" onChange={this.login} onFocus={this.value=""}/>
-        <br>
+        </p>
         <input type="text" placeholder="Contraseña" onChange={this.login} onFocus={this.value=""}/>
-        <br>
+        </p>
         <input type="button" value="Ingresar " onClick={this.login}/>
         </div>
         </center>
