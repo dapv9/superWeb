@@ -6,7 +6,7 @@ export default class codigos extends Component{
 	render(){
 		let cadaCodigo =[];
 
-		ListaInventario.forEach((inventario) =>{
+		ListaCodigos.forEach((codigos) =>{
 				cadaCodigo.push(<MostrarCodigos codigos={codigos} key={codigos.codigo}/>);
 			});
 
