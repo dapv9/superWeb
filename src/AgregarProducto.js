@@ -11,9 +11,8 @@ export default class agregarProducto extends Component {
       precio: " ",
       sku: " ",
       cantidad: " ",
-      existe: "Ingrese un nuevo producto",
+      mensaje: "",
       auxiliar: false,
-      holi: " ",
       agregado: false,
     }
     this.tomarNombre = this.tomarNombre.bind(this);
@@ -40,20 +39,17 @@ export default class agregarProducto extends Component {
   }
 
   guardarProducto() {
-    this.setState({sku: " "});
-    let boton = [];
-    let termino = null;
-    let auxiliar = null;
+    let exists = false;
     ListaInventario.forEach((listaInventario) => {
-      if(listaInventario.sku == this.state.sku) {
-        this.setState({existe: "El producto ya existe", auxiliar: true});
+      if(listaInventario.sku == this.state.sku && exists == false) {
+        this.setState({Mensaje: "El producto ya existe"});
+        exists = true;
       }
     });
-    ListaInventario.forEach((listaInventario) => {
-      if(listaInventario.sku == auxiliar && !this.state.agregado && this.state.auxiliar) {
-        this.setState({})
-      }
-    });
+    if(!exists){
+      ListaInventario.push({nombre:`${this.state.nombre}`, cantidad: `${this.state.cantidad}`, sku: `${this.state.sku}`, precio: `${this.state.precio}`});
+      this.setState({Mensaje: "El producto ha sido agregado con éxito."});
+    }
   }
   render(){
     return(
@@ -65,8 +61,7 @@ export default class agregarProducto extends Component {
       <p><input type="text" placeholder="Precio" onChange={this.tomarPrecio} onFocus={this.value=""}/></p>
       <p><input type="text" placeholder="Referencia" onChange={this.tomarSku} onFocus={this.value=""}/></p>
       <p><input type="button" value="Guardar " onClick={this.guardarProducto}/></p>
-      <p>{this.state.existe}</p>
-      <p>{this.state.holi}</p>
+      <p>{this.state.Mensaje}</p>
       </center>
       </div>
     )
