@@ -40,7 +40,7 @@ const Menu = () => (
       <Route path="/AgregarProducto" component={AgregarProducto}/>
       <Route path="/AgregarInventario" component={AgregarInventario}/>
       <Route path="/GenerarCodigo" component={GenerarCodigo}/>
-      <Route path="/RealizarCompra" component={RealizarCompra}/>/>
+      <Route path="/RealizarCompra" component={RealizarCompra}/>
     </div>
   </Router>
 )

@@ -5,12 +5,8 @@ export default class RealizarCompra extends Component{
     return(
       <div>
       <center>
-      <p>Agregar nuevo producto </p>
-      <p><input type="text" placeholder="Nombre del producto" onChange={this.tomarNombre} onFocus={this.value=""}/></p>
-      <p><input type="text" placeholder="Cantidad" onChange={this.tomarCantidad} onFocus={this.value=""}/></p>
-      <p><input type="text" placeholder="Precio" onChange={this.tomarPrecio} onFocus={this.value=""}/></p>
-      <p><input type="text" placeholder="Referencia" onChange={this.tomarSku} onFocus={this.value=""}/></p>
-      <p><input type="button" value="Guardar " onClick={this.guardarProducto}/></p>
+      <p>Comprar producto </p>
+      <p><input type="text" placeholder="Buscar Producto" onChange={this.tomarNombre} onFocus={this.value=""}/></p>
       </center>
       </div>
     )
