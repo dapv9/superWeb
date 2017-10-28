@@ -7,8 +7,10 @@ export default class Login extends Component {
       return(
         <div>
         <center>
-        <input type="text" placeholder="Usuario" onChange={this.login} onFocus={this.value=""}/><br>
-        <input type="text" placeholder="Contraseña" onChange={this.login} onFocus={this.value=""}/><br>
+        <input type="text" placeholder="Usuario" onChange={this.login} onFocus={this.value=""}/>
+          <br>
+        <input type="text" placeholder="Contraseña" onChange={this.login} onFocus={this.value=""}/>
+          <br>
         <input type="button" value="Ingresar " onClick={this.login}/>
         </center>
         </div>
