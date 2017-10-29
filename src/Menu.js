@@ -12,7 +12,7 @@ import {
   BrowserRouter as Router,
   Route,
   Link
-} from 'react-router-dom';
+} from 'react-router-dom'
 
 const Menu = () => (
   <Router>
