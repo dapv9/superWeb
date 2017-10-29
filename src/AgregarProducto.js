@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import ListaInventario from './ListaInventario.js';
-import Inventario from './Inventario.js';
 
 export default class agregarProducto extends Component {
   constructor(props) {
@@ -12,7 +11,6 @@ export default class agregarProducto extends Component {
       sku: "",
       cantidad: "",
       mensaje: "",
-      auxiliar: false,
       agregado: false,
       skuAvailable: "",
     }
@@ -24,21 +22,21 @@ export default class agregarProducto extends Component {
     this.comprobarSku = this.comprobarSku.bind(this);
     this.aumentarProducto = this.aumentarProducto.bind(this);
   }
+
   tomarNombre(e) {
     this.setState({nombre: e.target.value})
-    console.log(this.state.nombre)
   }
+
   tomarCantidad(e) {
     this.setState({cantidad: e.target.value})
-    console.log(this.state.cantidad)
   }
+
   tomarSku(e) {
     this.setState({sku: e.target.value})
-    console.log(this.state.sku)
   }
+
   tomarPrecio(e) {
     this.setState({precio: e.target.value})
-    console.log(this.state.precio)
   }
 
   comprobarSku() {
@@ -81,21 +79,22 @@ export default class agregarProducto extends Component {
     let contentToShow = null;
     if(this.skuAvailable == true){
       contentToShow = [
-      <p>Nombre:&nbsp; <input type="text" placeholder="Ingrese el Nombre" onChange={this.tomarNombre} onFocus={this.value=""}/></p>,
-      <p>Cantidad:&nbsp; <input type="text" placeholder="Ingrese la Cantidad" onChange={this.tomarCantidad} onFocus={this.value=""}/></p>,
-      <p>Precio:&nbsp; <input type="text" placeholder="Ingrese el Precio" onChange={this.tomarPrecio} onFocus={this.value=""}/></p>,
+      <p>Nombre:&nbsp; <input type="text" placeholder="Nombre del Producto" onChange={this.tomarNombre} onFocus={this.value=""}/></p>,
+      <p>Cantidad:&nbsp; <input type="text" placeholder="Cantidad del Producto" onChange={this.tomarCantidad} onFocus={this.value=""}/></p>,
+      <p>Precio:&nbsp; <input type="text" placeholder="Precio del Producto" onChange={this.tomarPrecio} onFocus={this.value=""}/></p>,
       <p><input type="button" value="Confirmar" onClick={this.guardarProducto}/></p>]
     } else if(this.skuAvailable == false){
       contentToShow = [
-      <p>Cantidad:&nbsp; <input type="text" placeholder="Ingrese la Cantidad" onChange={this.tomarCantidad} onFocus={this.value=""}/></p>,
+      <p>Cantidad:&nbsp; <input type="text" placeholder="Cantidad del Producto" onChange={this.tomarCantidad} onFocus={this.value=""}/></p>,
       <p><input type="button" value="Confirmar" onClick={this.aumentarProducto}/></p>]
     }
     return(
       <div>
       <center>
-      <p>Agregar nuevo producto </p>
+      <h2>Agregar producto o existencias</h2>
+      <p>Puedes buscar un producto por medio de una búsqueda. Escribe el Nombre del producto o el Sku para realizar la búsqueda.</p>
       <p>Sku:&nbsp;
-      <input type="text" placeholder="Ingrese el Sku" onChange={this.tomarSku} onFocus={this.value=""}/>
+      <input type="text" placeholder="Sku del Producto" onChange={this.tomarSku} onFocus={this.value=""}/>
       <input type="button" value="Comprobar Sku" onClick={this.comprobarSku}/>
       </p>
       {contentToShow}

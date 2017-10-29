@@ -12,7 +12,6 @@ export default class inventario extends Component{
 		ListaInventario.forEach((inventario) =>{
 				if(inventario.id !== termino) {
 					cadaproducto.push(<MostrarInventario inventario={inventario} key={inventario.sku}/>);
-
 				}
 				termino = inventario.sku;
 			});
