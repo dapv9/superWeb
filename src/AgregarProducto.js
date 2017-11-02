@@ -43,19 +43,19 @@ export default class agregarProducto extends Component {
     let skuAv = true;
     for(let producto in ListaInventario){
       if(ListaInventario[producto].sku == this.state.sku) {
-        this.setState({mensaje: "El código ya está registrado a un producto, sólo es posible aumentar la cantidad de dicho producto."});
+        this.setState({mensaje: "El código " + this.state.sku + " ya está registrado al producto: '" + ListaInventario[producto].nombre + "' y sólo es posible aumentar su cantidad."});
         skuAv = false;
       }
     }
     if(skuAv == true){
-      this.setState({mensaje: "El código está disponible para ser registrado, puede añadir un nombre al producto, una cantidad inicial y el precio."})
+      this.setState({mensaje: "El código está disponible para ser registrado, puede añadir un nombre al producto, una cantidad y precio por unidad."})
     }
     this.skuAvailable = skuAv;
   }
 
   guardarProducto() {
     let empty = true;
-    if(this.state.nombre != null && this.state.cantidad != null && this.state.cantidad >= 0 && this.state.sku != null && this.state.precio != null){
+    if(this.state.nombre != null && this.state.cantidad != null && this.state.cantidad >= 0 && this.state.precio >= 0&& this.state.sku != null && this.state.precio != null){
       this.setState({mensaje: "No pueden haber campos vacíos"})
       empty = false;
     }
@@ -63,12 +63,11 @@ export default class agregarProducto extends Component {
         ListaInventario.push({nombre:`${this.state.nombre}`, cantidad: `${this.state.cantidad}`, sku: `${this.state.sku}`, precio: `${this.state.precio}`});
         this.setState({mensaje: "El producto ha sido agregado con éxito."});
     }
-    this.comprobarSku();
-  }
+      }
 
   aumentarProducto() {
     let empty2 = true;
-    if(this.state.cantidad != null && this.state.cantidad >= 0){
+    if(this.state.cantidad > 0){
         this.setState({mensaje: "La cantidad debe ser mayor que cero"})
         empty2 = false;
       }
@@ -76,7 +75,7 @@ export default class agregarProducto extends Component {
         for(let producto in ListaInventario){
         if(ListaInventario[producto].sku == this.state.sku) {
           ListaInventario[producto].cantidad = parseInt(this.state.cantidad) + parseInt(ListaInventario[producto].cantidad);
-          this.setState({mensaje: "Se han agregado las existencias al producto seleccionado."});
+          this.setState({mensaje: "Se han aumentado las existencias del producto seleccionado en: " + this.state.cantidad + ". Para un total de " + ListaInventario[producto].cantidad + " unidades del producto."});
         }
       }
     }
@@ -92,7 +91,7 @@ export default class agregarProducto extends Component {
       <p><input type="button" value="Confirmar" onClick={this.guardarProducto}/></p>]
     } else if(this.skuAvailable == false){
       contentToShow = [
-      <p>Cantidad:&nbsp; <input type="text" placeholder="Cantidad del Producto" onChange={this.tomarCantidad} onFocus={this.value=""}/></p>,
+      <p>Cantidad:&nbsp; <input type="text" placeholder="Cantidad del Producto" onChange={this.tomarCantidad} onFocus={this.value=""}/>&nbsp;*mayor a 0</p>,
       <p><input type="button" value="Confirmar" onClick={this.aumentarProducto}/></p>]
     }
     return(
