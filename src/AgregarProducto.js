@@ -55,7 +55,7 @@ export default class agregarProducto extends Component {
 
   guardarProducto() {
     let empty = true;
-    if(this.state.nombre != null && this.state.cantidad != null && this.state.sku != null && this.state.precio != null){
+    if(this.state.nombre != null && this.state.cantidad != null && this.state.cantidad >= 0 && this.state.sku != null && this.state.precio != null){
       this.setState({mensaje: "No pueden haber campos vacíos"})
       empty = false;
     }
