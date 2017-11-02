@@ -68,12 +68,12 @@ export default class agregarProducto extends Component {
 
   aumentarProducto() {
     let empty2 = true;
-    for(let producto in ListaInventario){
-      if(this.state.cantidad != null && this.state.cantidad >= 0){
+    if(this.state.cantidad != null && this.state.cantidad >= 0){
         this.setState({mensaje: "La cantidad debe ser mayor que cero"})
         empty2 = false;
       }
       if (!empty2){
+        for(let producto in ListaInventario){
         if(ListaInventario[producto].sku == this.state.sku) {
           ListaInventario[producto].cantidad = parseInt(this.state.cantidad) + parseInt(ListaInventario[producto].cantidad);
           this.setState({mensaje: "Se han agregado las existencias al producto seleccionado."});
