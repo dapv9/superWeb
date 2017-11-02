@@ -79,7 +79,6 @@ export default class agregarProducto extends Component {
           this.setState({mensaje: "Se han agregado las existencias al producto seleccionado."});
         }
       }
-      this.comprobarSku();
     }
   }
 
