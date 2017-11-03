@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import ReactDOM from 'react-dom';
 import ListaInventario from './ListaInventario.js';
+import Login from './Login.js';
 
 export default class agregarProducto extends Component {
   constructor(props) {
@@ -40,6 +41,11 @@ export default class agregarProducto extends Component {
   }
 
   comprobarSku() {
+    if(Login.returnLogged()){
+      console.log("Yeah");
+    } else{
+      console.log("Nope");
+    }
     let skuAv = true;
     for(let producto in ListaInventario){
       if(ListaInventario[producto].sku == this.state.sku) {
