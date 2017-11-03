@@ -31,6 +31,7 @@ export default class Login extends Component {
         this.setState({loggedName: this.state.usuario});
         this.setState({tipoUsuario: 'seller'})
         this.setState({logged: true});
+        console.log(`Se ha logueado con el nombre de Usuario: ${this.state.usuario}`);
         return;
       }
     }
