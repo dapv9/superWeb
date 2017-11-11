@@ -25,7 +25,6 @@ export default class Login extends Component {
 
   checkLogin() {
     for (let vendedor in ListaVendedores) {
-<<<<<<< HEAD
       if(this.state.usuario == ListaVendedores[vendedor].usuario && this.state.contraseña == ListaVendedores[vendedor].contraseña) {
         this.props.successLogin(this.state.usuario, "seller");
         return;
@@ -34,13 +33,6 @@ export default class Login extends Component {
     for (let comprador in ListaCompradores) {
       if(this.state.usuario == ListaCompradores[comprador].usuario && this.state.contraseña == ListaCompradores[comprador].contraseña) {
         this.props.successLogin(this.state.usuario, "buyer");
-=======
-      if (this.state.usuario == ListaVendedores[vendedor].usuario && this.state.contraseña == ListaVendedores[vendedor].contraseña) {
-        this.setState({loggedName: this.state.usuario});
-        this.setState({tipoUsuario: 'seller'})
-        this.setState({logged: true});
-        console.log(`Se ha logueado con el nombre de Usuario: ${this.state.usuario}`);
->>>>>>> f094ce3724f515743e1414a4cf29389864681cc4
         return;
       }
     }
