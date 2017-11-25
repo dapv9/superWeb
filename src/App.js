@@ -70,7 +70,7 @@ class App extends Component {
     const verCodigo = <Codigos name="{Codigos}"/>;
     const agregarProducto = <AgregarProducto name="{AgregarProducto}"/>;
     const compras = <Compras name="{Compras}"/>;
-    const cuentas = <Cuentas name="{Cuentas}"/>;
+    const cuentas = <Cuentas name="{Cuentas}" getUsername={this.getUsername}/>;
     const realizarCompra = <RealizarCompra name="{RealizarCompra}" getUsername={this.getUsername} updatePurchase={this.updatePurchase} getPurchase={this.getPurchase}/>;
     if(this.state.userType == ""){
       buttons = <input type="button" value="Ingresar" onClick={this.updateShowComponent}/>;

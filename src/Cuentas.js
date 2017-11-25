@@ -8,7 +8,9 @@ export default class Cuentas extends Component {
   render() {
     let cuentas = [];
     for (let cuenta in ListaCuentas) {
-      cuentas.push(<MostrarCuentas cuenta={ListaCuentas[cuenta]}/>);
+      if (ListaCuentas[cuenta].usuario == this.props.getUsername()) {
+        cuentas.push(<MostrarCuentas cuenta={ListaCuentas[cuenta]}/>);
+      }
     }
     return (<center>
       <div>
