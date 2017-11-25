@@ -8,6 +8,7 @@ import RealizarCompra from './RealizarCompra.js';
 import GenerarCodigo from './GenerarCodigo.js';
 import AgregarProducto from './AgregarProducto.js';
 import Compras from './Compras.js';
+import Domicilios from './Domicilios.js';
 
 class App extends Component {
 
@@ -67,6 +68,7 @@ class App extends Component {
     const inventario = <Inventario name="{Inventario}"/>;
     const generarCodigo = <GenerarCodigo name="{GenerarCodigo}"/>;
     const verCodigo = <Codigos name="{Codigos}"/>;
+    const domicilios = <Domicilios name="{Domicilios}"/>;
     const agregarProducto = <AgregarProducto name="{AgregarProducto}"/>;
     const compras = <Compras name="{Compras}"/>;
     const realizarCompra = <RealizarCompra name="{RealizarCompra}" getUsername={this.getUsername} updatePurchase={this.updatePurchase} getPurchase={this.getPurchase}/>;
@@ -78,6 +80,7 @@ class App extends Component {
         <input type="button" value="Agregar Producto" onClick={this.updateShowComponent}/>,
         <input type="button" value="Generar Código" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Código" onClick={this.updateShowComponent}/>,
+        <input type="button" value="Ver Domicilios" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Compras" onClick={this.updateShowComponent}/>,
         <input type="button" value="Cerrar Sesión" onClick={this.logout}/>
       ]
@@ -85,6 +88,7 @@ class App extends Component {
       buttons = [
         <input type="button" value="Ver Inventario" onClick={this.updateShowComponent}/>,
         <input type="button" value="Realizar Compra" onClick={this.updateShowComponent}/>,
+        <input type="button" value="Ver Domicilios" onClick={this.updateShowComponent}/>,
         <input type="button" value="Cerrar Sesión" onClick={this.logout}/>
       ]
     }
@@ -106,6 +110,9 @@ class App extends Component {
       case "Generar Código":
         show = generarCodigo;
         break;
+      case "Ver Domicilios":
+          show = domicilios;
+          break;
       case "Ver Compras":
         show = compras;
         break;

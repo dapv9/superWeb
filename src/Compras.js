@@ -3,6 +3,7 @@ import MostrarCompras from './MostrarCompras.js';
 import ListaCompras from './ListaCompras.js';
 
 export default class Compras extends Component {
+
   render() {
     let compras = [];
     for (let compra in ListaCompras) {
