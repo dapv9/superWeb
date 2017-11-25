@@ -8,6 +8,7 @@ import RealizarCompra from './RealizarCompra.js';
 import GenerarCodigo from './GenerarCodigo.js';
 import AgregarProducto from './AgregarProducto.js';
 import Compras from './Compras.js';
+import Cuentas from './Cuentas.js';
 import Domicilios from './Domicilios.js';
 
 class App extends Component {
@@ -71,6 +72,7 @@ class App extends Component {
     const domicilios = <Domicilios name="{Domicilios}"/>;
     const agregarProducto = <AgregarProducto name="{AgregarProducto}"/>;
     const compras = <Compras name="{Compras}"/>;
+    const cuentas = <Cuentas name="{Cuentas}" getUsername={this.getUsername}/>;
     const realizarCompra = <RealizarCompra name="{RealizarCompra}" getUsername={this.getUsername} updatePurchase={this.updatePurchase} getPurchase={this.getPurchase}/>;
     if(this.state.userType == ""){
       buttons = <input type="button" value="Ingresar" onClick={this.updateShowComponent}/>;
@@ -88,6 +90,7 @@ class App extends Component {
       buttons = [
         <input type="button" value="Ver Inventario" onClick={this.updateShowComponent}/>,
         <input type="button" value="Realizar Compra" onClick={this.updateShowComponent}/>,
+        <input type="button" value="Ver Cuentas" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Domicilios" onClick={this.updateShowComponent}/>,
         <input type="button" value="Cerrar Sesión" onClick={this.logout}/>
       ]
@@ -116,6 +119,9 @@ class App extends Component {
       case "Ver Compras":
         show = compras;
         break;
+      case "Ver Cuentas":
+          show = cuentas;
+          break;
       case "Ver Código":
         show = verCodigo;
         break;
