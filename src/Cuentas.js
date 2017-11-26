@@ -37,19 +37,12 @@ export default class Cuentas extends Component {
         transacciones.push(<MostrarTransacciones transaccion={ListaTransacciones[transaccion]}/>);
       }
     }
-<<<<<<< HEAD
+
     return (<center>
       <div>
         <h4>Bienvenido: {this.props.getUsername}</h4>
         <h3>Cuentas</h3>
         <table className= "App-tablas">
-=======
-
-    return(
-      <center>
-        <div>
-          <h3>Cuentas</h3>
-          <table className= "App-tablas">
             <tbody>
               <select onChange={this.callThis} className="form-control" id="ntype" required>
                 <option value="none">Seleccione una Cuenta...</option>
@@ -58,7 +51,6 @@ export default class Cuentas extends Component {
             </tbody>
           </table>
           <table className= "App-tablas">
->>>>>>> cdf3845326b0e14f29d4fdbb3a61655aedb3888f
           <thead>
             <tr>
               <th>Codigo Compra</th>
