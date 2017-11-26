@@ -10,6 +10,7 @@ import AgregarProducto from './AgregarProducto.js';
 import Compras from './Compras.js';
 import Cuentas from './Cuentas.js';
 import Domicilios from './Domicilios.js';
+import PedidosPendientes from './PedidosPendientes.js';
 
 class App extends Component {
 
@@ -20,7 +21,8 @@ class App extends Component {
       username: "",
       userType: "",
       listaCompra: [],
-      valorCompra: 0
+      valorCompra: 0,
+      deliveryType: ""
     }
     this.updateShowComponent = this.updateShowComponent.bind(this);
     this.logout = this.logout.bind(this);
@@ -71,14 +73,15 @@ class App extends Component {
     let show = null;
     let buttons = null;
     const login = <Login name="{Login}" successLogin={this.successLogin}/>;
-    const inventario = <Inventario name="{Inventario}"/>;
-    const generarCodigo = <GenerarCodigo name="{GenerarCodigo}"/>;
-    const verCodigo = <Codigos name="{Codigos}"/>;
-    const domicilios = <Domicilios name="{Domicilios}"/>;
-    const agregarProducto = <AgregarProducto name="{AgregarProducto}"/>;
+    const inventario = <Inventario name="{Inventario}" getUsername ={this.state.username}/>;
+    const generarCodigo = <GenerarCodigo name="{GenerarCodigo}" getUsername ={this.state.username}/>;
+    const verCodigo = <Codigos name="{Codigos}" getUsername ={this.state.username}/>;
+    const agregarProducto = <AgregarProducto name="{AgregarProducto}" getUsername ={this.state.username}/>;
+    const domicilios = <Domicilios name="{Domicilios}" getUsername ={this.state.username} getUserType={this.state.userType}/>;
     const compras = <Compras name="{Compras}" getUsername={this.state.username} getUserType={this.state.userType}/>;
     const cuentas = <Cuentas name="{Cuentas}" getUsername={this.getUsername}/>;
-    const realizarCompra = <RealizarCompra name="{RealizarCompra}" getUsername={this.getUsername} updatePurchase={this.updatePurchase} getPurchase={this.getPurchase}/>;
+    const realizarCompra = <RealizarCompra name="{RealizarCompra}" getUsername={this.state.getUsername} updatePurchase={this.updatePurchase} getPurchase={this.getPurchase}/>;
+    const pedidos = <PedidosPendientes name="{PedidosPendientes}" getUsername={this.state.getUsername} getUserType={this.state.userType}/>;
     if(this.state.userType == ""){
       buttons = <input type="button" value="Ingresar" onClick={this.updateShowComponent}/>;
     } else if(this.state.userType == "seller"){
@@ -89,7 +92,8 @@ class App extends Component {
         <input type="button" value="Ver Código" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Domicilios" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Compras" onClick={this.updateShowComponent}/>,
-        <input type="button" value="Cerrar Sesión" onClick={this.logout}/>
+        <input type="button" value="Ver Pedidos" onClick={this.updateShowComponent}/>,
+        <input type="button" value="Cerrar Sesión" onClick={this.logout}/>,
       ]
     } else if(this.state.userType == "buyer"){
       buttons = [
@@ -98,6 +102,7 @@ class App extends Component {
         <input type="button" value="Ver Cuentas" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Compras" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Domicilios" onClick={this.updateShowComponent}/>,
+        <input type="button" value="Ver Pedidos" onClick={this.updateShowComponent}/>,
         <input type="button" value="Cerrar Sesión" onClick={this.logout}/>
       ]
     }
@@ -131,6 +136,9 @@ class App extends Component {
       case "Ver Código":
         show = verCodigo;
         break;
+      case "Ver Pedidos":
+        show = pedidos;
+        break;
     }
     return (<div className="App">
       <div className="App-header"></div>
@@ -138,9 +146,7 @@ class App extends Component {
         <p>
           {buttons}
         </p>
-
       </p>
-
       <div>
         {show}
       </div>

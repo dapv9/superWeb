@@ -1,29 +1,46 @@
 import React, {Component} from 'react';
-import ListaInventario from './ListaInventario.js';
-import ListaCompras from './ListaCompras.js';;
+import MostrarPedidos from './MostrarPedidos.js';
+import MostrarPedidosUsuario from './MostrarPedidosUsuario.js';
+import ListaCompras from './ListaCompras.js';
 
 export default class PedidosPendientes extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-
-    }
-
-  }
 
   render() {
-
+    let userTypeContent = null;
+    let pedidos = [];
+    if (this.props.getUserType == "seller") {
+      userTypeContent = <th>Comprador</th>;
+      for (let pedido in ListaCompras) {
+        pedidos.push(<MostrarPedidos pedido={ListaCompras[pedido]}/>);
+      }
+    } else if (this.props.getUserType == "buyer") {
+      for (let pedido in ListaCompras) {
+        if (this.props.getUsername == ListaCompras[pedido].buyer) {
+          pedidos.push(<MostrarPedidosUsuario pedido={ListaCompras[pedido]}/>);
+        }
+      }
+    }
     return (<center>
       <div>
-        <h3>Pedidos</h3>
+        <h4>Bienvenido: {this.props.getUsername}</h4>
+        <h3>Pedidos Pendientes</h3>
         <table className="App-tablas">
           <thead>
             <tr>
+              {userTypeContent}
+              <th>Codigo de Compra</th>
+              <th>Fecha</th>
+              <th>Valor Total</th>
+              <th>Código de Descuento</th>
+              <th>Tipo de Entrega</th>
+              <th>Valor Entrega</th>
             </tr>
           </thead>
           <tbody>
+            {pedidos}
           </tbody>
         </table>
       </div>
     </center>);
   }
+}

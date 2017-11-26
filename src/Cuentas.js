@@ -14,6 +14,7 @@ export default class Cuentas extends Component {
     }
     return (<center>
       <div>
+        <h4>Bienvenido: {this.props.getUsername}</h4>
         <h3>Cuentas</h3>
         <table className= "App-tablas">
           <thead>

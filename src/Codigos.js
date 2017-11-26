@@ -12,6 +12,7 @@ export default class codigos extends Component{
 
 		return(
 				<center>
+				<h4>Bienvenido: {this.props.getUsername}</h4>
 				<div><h3>CODIGOS</h3>
 				<table className= "App-tablas">
 					<thead>

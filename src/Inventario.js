@@ -19,7 +19,9 @@ export default class inventario extends Component{
 
 		return(
 				<center>
-				<div><h3>INVENTARIO</h3>
+				<div>
+				<h4>Bienvenido: {this.props.getUsername}</h4>
+				<h3>INVENTARIO</h3>
 				<table className= "App-tablas">
 					<thead>
 						<tr>
