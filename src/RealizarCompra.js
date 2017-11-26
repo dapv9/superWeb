@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import ListaInventario from './ListaInventario.js';
 import ListaCompras from './ListaCompras.js';
 import MostrarListaCompra from './MostrarListaCompra.js';
@@ -27,7 +26,8 @@ export default class RealizarCompra extends Component {
     this.buscarSku = this.buscarSku.bind(this);
     this.buscarNombre = this.buscarNombre.bind(this);
     this.addProduct = this.addProduct.bind(this);
-    this.buy = this.buy.bind(this);
+    this.buyDelivery = this.buyDelivery.bind(this);
+    this.buyCollect = this.buyCollect.bind(this);
     this.noBuy = this.noBuy.bind(this);
     this.cleanProductList = this.cleanProductList.bind(this);
     this.showProductList = this.showProductList.bind(this);
@@ -97,7 +97,7 @@ export default class RealizarCompra extends Component {
     this.props.updatePurchase(this.state.listaCompra, this.state.valorCompra);
   }
 
-  buy() {
+  buyCollect() {
     const date = new Date();
     if (this.state.listaCompra.length < 1) {
       return;
@@ -107,7 +107,12 @@ export default class RealizarCompra extends Component {
       date: "",
       productList: [],
       totalPrice: 0,
-      discountCode: ""
+      discountCode: "",
+      deliveryType: "CollectService",
+      deliveryCost: 5000,
+      deliverySent: false,
+      deliveryAccepted: false,
+      deliveryRejectedReason: "",
     }
     compra.buyer = this.props.getUsername();
     compra.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
@@ -117,6 +122,41 @@ export default class RealizarCompra extends Component {
       compra.totalPrice = this.state.valorCompra;
     } else {
       compra.totalPrice = this.state.valorCompra * 0.9;
+    }
+    this.cleanProductList();
+    ListaCompras.push(compra);
+  }
+
+  buyDelivery() {
+    const date = new Date();
+    if (this.state.listaCompra.length < 1) {
+      return;
+    }
+    const compra = {
+      buyer: "",
+      date: "",
+      productList: [],
+      totalPrice: 0,
+      discountCode: "",
+      deliveryType: "DeliveryService",
+      deliveryCost: 5000,
+      deliverySent: false,
+      deliveryAccepted: false,
+      deliveryRejectedReason: "",
+    }
+    compra.buyer = this.props.getUsername();
+    compra.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    compra.productList = this.state.listaCompra;
+    compra.discountCode = this.state.discountCode;
+    if (compra.discountCode == "") {
+      compra.totalPrice = this.state.valorCompra;
+    } else {
+      compra.totalPrice = this.state.valorCompra * 0.9;
+    }
+    if (compra.totalPrice * 0.05 < 5000) {
+      compra.deliveryCost = 5000;
+    } else {
+      compra.deliveryCost = compra.totalPrice * 0.05;
     }
     this.cleanProductList();
     ListaCompras.push(compra);
@@ -163,7 +203,8 @@ export default class RealizarCompra extends Component {
     if (this.state.listaCompra.length > 0) {
       productListButtons = <p>
         <input type="button" value="Añadir a la Compra" onClick={this.addProduct}/>
-        <input type="button" value="Comprar Productos" onClick={this.buy}/>
+        <input type="button" value="Comprar Productos (Recogida personal)" onClick={this.buyCollect}/>
+        <input type="button" value="Comprar Productos (Envío a domicilio)" onClick={this.buyDelivery}/>
         <input type="button" value={this.state.productListMessage} onClick={this.showProductList}/>
         <input type="button" value="Vaciar lista de Productos" onClick={this.noBuy}/>
       </p>;
