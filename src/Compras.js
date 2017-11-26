@@ -8,21 +8,21 @@ export default class Compras extends Component {
   render() {
     let userTypeContent = null;
     let compras = [];
-    if (this.props.getUserType == "seller") {
+    if (this.props.getUserType() == "seller") {
       userTypeContent = <th>Comprador</th>;
       for (let compra in ListaCompras) {
         compras.push(<MostrarCompras compra={ListaCompras[compra]}/>);
       }
-    } else if (this.props.getUserType == "buyer") {
+    } else if (this.props.getUserType() == "buyer") {
       for (let compra in ListaCompras) {
-        if (this.props.getUsername == ListaCompras[compra].buyer) {
+        if (this.props.getUsername() == ListaCompras[compra].buyer) {
           compras.push(<MostrarComprasUsuario compra={ListaCompras[compra]}/>);
         }
       }
     }
     return (<center>
       <div>
-        <h4>Bienvenido: {this.props.getUsername}</h4>
+        <h4>Bienvenido: {this.props.getUsername()}</h4>
         <h3>Compras</h3>
         <table className="App-tablas">
           <thead>

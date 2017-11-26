@@ -249,6 +249,7 @@ export default class RealizarCompra extends Component {
 
     return (<div>
       <center>
+        <h4>Bienvenido: {this.props.getUsername()}</h4>
         <h2>Realizar Compra</h2>
         <p>Puedes encontrar un producto por medio de una búsqueda. Escribe el Nombre del producto o el Sku para poder realizar la búsqueda.</p>
         <p>

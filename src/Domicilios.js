@@ -8,21 +8,21 @@ export default class Domicilios extends Component {
   render() {
     let userTypeContent = null;
     let domicilios = [];
-    if (this.props.getUserType == "seller") {
+    if (this.props.getUserType() == "seller") {
       userTypeContent = <th>Comprador</th>;
       for (let domicilio in ListaCompras) {
         domicilios.push(<MostrarDomicilios domicilio={ListaCompras[domicilio]}/>);
       }
-    } else if (this.props.getUserType == "buyer") {
+    } else if (this.props.getUserType() == "buyer") {
       for (let domicilio in ListaCompras) {
-        if (this.props.getUsername == ListaCompras[domicilio].buyer) {
+        if (this.props.getUsername() == ListaCompras[domicilio].buyer) {
           domicilios.push(<MostrarDomiciliosUsuario domicilio={ListaCompras[domicilio]}/>);
         }
       }
     }
     return (<center>
       <div>
-        <h4>Bienvenido: {this.props.getUsername}</h4>
+        <h4>Bienvenido: {this.props.getUsername()}</h4>
         <h3>Domicilios</h3>
         <table className="App-tablas">
           <thead>

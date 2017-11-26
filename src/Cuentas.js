@@ -18,12 +18,7 @@ export default class Cuentas extends Component {
     this.setState({cuenta: e.target.value});
   }
 
-  callThis2 = (e) => {
-    this.setState({cuenta: e.target.value});
-  }
-
   render() {
-
     for (let cuenta in ListaCuentas) {
       if (ListaCuentas[cuenta].usuario == this.props.getUsername()) {
         this.state.cuentas.push(<MostrarCuentas cuenta={ListaCuentas[cuenta]}/>);
@@ -40,7 +35,7 @@ export default class Cuentas extends Component {
 
     return (<center>
       <div>
-        <h4>Bienvenido: {this.props.getUsername}</h4>
+        <h4>Bienvenido: {this.props.getUsername()}</h4>
         <h3>Cuentas</h3>
         <table className= "App-tablas">
             <tbody>

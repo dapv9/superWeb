@@ -107,6 +107,8 @@ export default class agregarProducto extends Component {
     }
     return (<div>
       <center>
+        <h4>Bienvenido: {this.props.getUsername()}</h4>
+        <p/>
         <h2>Agregar producto o existencias</h2>
         <p>Puedes buscar un producto por medio de una búsqueda. Escribe el Nombre del producto o el Sku para realizar la búsqueda.</p>
         <p>Sku:&nbsp;
