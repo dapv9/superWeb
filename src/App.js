@@ -76,13 +76,8 @@ class App extends Component {
     const verCodigo = <Codigos name="{Codigos}"/>;
     const domicilios = <Domicilios name="{Domicilios}"/>;
     const agregarProducto = <AgregarProducto name="{AgregarProducto}"/>;
-<<<<<<< HEAD
     const compras = <Compras name="{Compras}" getUsername={this.state.username} getUserType={this.state.userType}/>;
-    const cuentas = <Cuentas name="{Cuentas}"/>;
-=======
-    const compras = <Compras name="{Compras}"/>;
     const cuentas = <Cuentas name="{Cuentas}" getUsername={this.getUsername}/>;
->>>>>>> 47698ac0a3fa13a4506adfcb9508c8208e47c40b
     const realizarCompra = <RealizarCompra name="{RealizarCompra}" getUsername={this.getUsername} updatePurchase={this.updatePurchase} getPurchase={this.getPurchase}/>;
     if(this.state.userType == ""){
       buttons = <input type="button" value="Ingresar" onClick={this.updateShowComponent}/>;
@@ -101,11 +96,8 @@ class App extends Component {
         <input type="button" value="Ver Inventario" onClick={this.updateShowComponent}/>,
         <input type="button" value="Realizar Compra" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Cuentas" onClick={this.updateShowComponent}/>,
-<<<<<<< HEAD
         <input type="button" value="Ver Compras" onClick={this.updateShowComponent}/>,
-=======
         <input type="button" value="Ver Domicilios" onClick={this.updateShowComponent}/>,
->>>>>>> 47698ac0a3fa13a4506adfcb9508c8208e47c40b
         <input type="button" value="Cerrar Sesión" onClick={this.logout}/>
       ]
     }
