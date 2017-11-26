@@ -32,7 +32,6 @@ export default class PedidosPendientes extends Component {
               <th>Fecha</th>
               <th>Valor Total</th>
               <th>Código de Descuento</th>
-              <th>Tipo de Entrega</th>
               <th>Valor Entrega</th>
             </tr>
           </thead>

@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 export default class MostrarPedidosUsuario extends Component{
 	render(){
 		let showDeliveryInfo = null;
-		if(this.props.pedido.deliveryType == "Domicilio") {
+		if(this.props.pedido.deliveryType == "Domicilio" && this.props.pedido.deliverySent == false) {
 			let deliveryCost = this.props.pedido.totalPrice * 0.05;
 				if(deliveryCost >= 5000) {
 					deliveryCost = this.props.pedido.totalPrice * 0.05;
@@ -15,9 +15,8 @@ export default class MostrarPedidosUsuario extends Component{
 					<td>{this.props.pedido.date.toString()}</td>,
 					<td>{this.props.pedido.totalPrice.toString()}</td>,
 					<td>{this.props.pedido.discountCode.toString()}</td>,
-					<td>{this.props.pedido.deliveryType.toString()}</td>,
 					<td>{deliveryCost}</td>,
-					];
+				];
 		}
 		return(
 			<tr>

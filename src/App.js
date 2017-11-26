@@ -81,7 +81,7 @@ class App extends Component {
     const compras = <Compras name="{Compras}" getUsername={this.state.username} getUserType={this.state.userType}/>;
     const cuentas = <Cuentas name="{Cuentas}" getUsername={this.getUsername}/>;
     const realizarCompra = <RealizarCompra name="{RealizarCompra}" getUsername={this.state.getUsername} updatePurchase={this.updatePurchase} getPurchase={this.getPurchase}/>;
-    const pedidos = <PedidosPendientes name="{PedidosPendientes}" getUsername={this.state.getUsername} getUserType={this.state.userType}/>;
+    const pedidos = <PedidosPendientes name="{PedidosPendientes}" getUsername ={this.state.username} getUserType={this.state.userType}/>;
     if(this.state.userType == ""){
       buttons = <input type="button" value="Ingresar" onClick={this.updateShowComponent}/>;
     } else if(this.state.userType == "seller"){
@@ -92,7 +92,7 @@ class App extends Component {
         <input type="button" value="Ver Código" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Domicilios" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Compras" onClick={this.updateShowComponent}/>,
-        <input type="button" value="Ver Pedidos" onClick={this.updateShowComponent}/>,
+        <input type="button" value="Ver Pendientes" onClick={this.updateShowComponent}/>,
         <input type="button" value="Cerrar Sesión" onClick={this.logout}/>,
       ]
     } else if(this.state.userType == "buyer"){
@@ -102,7 +102,7 @@ class App extends Component {
         <input type="button" value="Ver Cuentas" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Compras" onClick={this.updateShowComponent}/>,
         <input type="button" value="Ver Domicilios" onClick={this.updateShowComponent}/>,
-        <input type="button" value="Ver Pedidos" onClick={this.updateShowComponent}/>,
+        <input type="button" value="Ver Pendientes" onClick={this.updateShowComponent}/>,
         <input type="button" value="Cerrar Sesión" onClick={this.logout}/>
       ]
     }
@@ -136,7 +136,7 @@ class App extends Component {
       case "Ver Código":
         show = verCodigo;
         break;
-      case "Ver Pedidos":
+      case "Ver Pendientes":
         show = pedidos;
         break;
     }
