@@ -43,13 +43,19 @@ export default class agregarProducto extends Component {
     for (let producto in ListaInventario) {
       if (ListaInventario[producto].sku === this.state.sku) {
         this.setState({
-          mensaje: "El código " + this.state.sku + " ya está registrado al producto: '" + ListaInventario[producto].nombre + "' y sólo es posible aumentar su cantidad."
+          mensaje: "El código "
+          + this.state.sku
+          + " ya está registrado al producto: '"
+          + ListaInventario[producto].nombre
+          + "' y sólo es posible aumentar su cantidad."
         });
         skuAv = false;
       }
     }
     if (skuAv === true) {
-      this.setState({mensaje: "El código está disponible para ser registrado, puede añadir un nombre al producto, una cantidad y precio por unidad."})
+      this.setState({
+        mensaje: "El código está disponible para ser registrado, puede añadir un nombre al producto, una cantidad y precio por unidad."
+      });
     }
     this.skuAvailable = skuAv;
   }
@@ -103,19 +109,21 @@ export default class agregarProducto extends Component {
         <p><input type="button" value="Confirmar" onClick={this.aumentarProducto}/></p>
       ]
     }
-    return (<div>
-      <center>
-        <h4>Bienvenido: {this.props.getUsername()}</h4>
-        <p/>
-        <h2>Agregar producto o existencias</h2>
-        <p>Puedes buscar un producto por medio de una búsqueda. Escribe el Nombre del producto o el Sku para realizar la búsqueda.</p>
-        <p>Sku:&nbsp;
-          <input type="text" placeholder="Sku del Producto" onChange={this.tomarSku} onFocus={this.value = ""}/>
-          <input type="button" value="Comprobar Sku" onClick={this.comprobarSku}/>
-        </p>
-        {contentToShow}
-        <p>{this.state.mensaje}</p>
-      </center>
-    </div>)
+    return(
+      <div>
+        <center>
+          <h4>Bienvenido: {this.props.getUsername()}</h4>
+          <p/>
+          <h2>Agregar producto o existencias</h2>
+          <p>Puedes buscar un producto por medio de una búsqueda. Escribe el Nombre del producto o el Sku para realizar la búsqueda.</p>
+          <p>Sku:&nbsp;
+            <input type="text" placeholder="Sku del Producto" onChange={this.tomarSku} onFocus={this.value = ""}/>
+            <input type="button" value="Comprobar Sku" onClick={this.comprobarSku}/>
+          </p>
+          {contentToShow}
+          <p>{this.state.mensaje}</p>
+        </center>
+      </div>
+    );
   }
 }

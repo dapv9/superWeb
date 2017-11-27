@@ -16,10 +16,12 @@ export default class Login extends Component {
   }
 
   tomarUsuario(e) {
+    this.setState({mensaje: ""});
     this.setState({usuario: e.target.value})
   }
 
   tomarContraseña(e) {
+    this.setState({mensaje: ""});
     this.setState({contraseña: e.target.value})
   }
 

@@ -89,7 +89,8 @@ export default class RealizarCompra extends Component {
           this.state.valorCompra += (ListaInventario[producto].precio * this.state.cantidadCompra);
           ListaInventario[producto].cantidad -= this.state.cantidadCompra;
           this.setState({cantidad: ListaInventario[producto].cantidad});
-        } else {
+        }
+        else{
           this.setState({mensaje: "No fue posible añadir el producto. Se excedió la cantidad en reserva de dicho producto."});
         }
       }
@@ -99,9 +100,11 @@ export default class RealizarCompra extends Component {
 
   buyCollect() {
     const date = new Date();
-    if (this.state.listaCompra.length < 1) {
+
+    if(this.state.listaCompra.length < 1){
       return;
     }
+
     const compra = {
       buyer: "",
       date: "",
@@ -114,24 +117,30 @@ export default class RealizarCompra extends Component {
       deliveryAccepted: false,
       deliveryRejectedReason: "",
     }
+
     compra.buyer = this.props.getUsername();
     compra.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
     compra.productList = this.state.listaCompra;
     compra.discountCode = this.state.discountCode;
-    if (compra.discountCode === "") {
+
+    if(compra.discountCode === ""){
       compra.totalPrice = this.state.valorCompra;
-    } else {
+    }
+    else{
       compra.totalPrice = this.state.valorCompra * 0.9;
     }
+
     this.cleanProductList();
     ListaCompras.push(compra);
   }
 
   buyDelivery() {
     const date = new Date();
-    if (this.state.listaCompra.length < 1) {
+
+    if (this.state.listaCompra.length < 1){
       return;
     }
+
     const compra = {
       buyer: "",
       date: "",
@@ -144,20 +153,26 @@ export default class RealizarCompra extends Component {
       deliveryAccepted: false,
       deliveryRejectedReason: "",
     }
+
     compra.buyer = this.props.getUsername();
     compra.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
     compra.productList = this.state.listaCompra;
     compra.discountCode = this.state.discountCode;
+
     if (compra.discountCode === "") {
       compra.totalPrice = this.state.valorCompra;
-    } else {
+    }
+    else {
       compra.totalPrice = this.state.valorCompra * 0.9;
     }
+
     if (compra.totalPrice * 0.05 < 5000) {
       compra.deliveryCost = 5000;
-    } else {
+    }
+    else {
       compra.deliveryCost = compra.totalPrice * 0.05;
     }
+
     this.cleanProductList();
     ListaCompras.push(compra);
   }
@@ -180,7 +195,8 @@ export default class RealizarCompra extends Component {
         this.state.productListToShow.push(<MostrarListaCompra producto={this.state.listaCompra[producto]}/>)
         this.setState({productListMessage: "Esconder Lista"});
       }
-    } else {
+    }
+    else {
       this.setState({productListToShow: []});
       this.setState({productListMessage: "Mostrar Lista"});
     }
@@ -199,6 +215,7 @@ export default class RealizarCompra extends Component {
     let contentToShow = null;
     let productListButtons = null;
     let listaCompra = null;
+
     if (this.state.listaCompra.length > 0) {
       productListButtons = <p>
         <input type="button" value="Añadir a la Compra" onClick={this.addProduct}/>
@@ -207,11 +224,13 @@ export default class RealizarCompra extends Component {
         <input type="button" value={this.state.productListMessage} onClick={this.showProductList}/>
         <input type="button" value="Vaciar lista de Productos" onClick={this.noBuy}/>
       </p>;
-    } else {
+    }
+    else {
       productListButtons = <p>
         <input type="button" value="Añadir a la Compra" onClick={this.addProduct}/>
       </p>;
     }
+
     if (this.state.showProduct) {
       contentToShow = [
         <p>Sku:&nbsp;{this.state.sku}</p>,
@@ -222,41 +241,46 @@ export default class RealizarCompra extends Component {
         productListButtons
       ]
     }
+
     if (this.state.productListToShow.length > 0) {
-      listaCompra = [<center>
-        <div>
-          <h3>Compras</h3>
-          <table className="App-tablas">
-            <thead>
-              <tr>
-                <th>Sku</th>
-                <th>Nombre</th>
-                <th>Cantidad</th>
-              </tr>
-            </thead>
-            <tbody>
-              {this.state.productListToShow}
-            </tbody>
-          </table>
-        </div>
-        <input type="button" value={this.state.productListMessage} onClick={this.showProductList}/>
-      </center>
-    ];
-    } else {
+      listaCompra = [
+        <center>
+          <div>
+            <h3>Compras</h3>
+            <table className="App-tablas">
+              <thead>
+                <tr>
+                  <th>Sku</th>
+                  <th>Nombre</th>
+                  <th>Cantidad</th>
+                </tr>
+              </thead>
+              <tbody>
+                {this.state.productListToShow}
+              </tbody>
+            </table>
+          </div>
+          <input type="button" value={this.state.productListMessage} onClick={this.showProductList}/>
+        </center>
+      ];
+    }
+    else {
       listaCompra = null;
     }
 
-    return (<div>
-      <center>
-        <h4>Bienvenido: {this.props.getUsername()}</h4>
-        <h2>Realizar Compra</h2>
-        <p>Puedes encontrar un producto por medio de una búsqueda. Escribe el Nombre del producto o el Sku para poder realizar la búsqueda.</p>
-        <p>
-          <input type="text" placeholder="Nombre o Sku del Producto" onChange={this.tomarSkuONombre} onFocus={this.value = ""}/> {contentToShow}
-        </p>
-        {listaCompra}
-        <p>{this.state.mensaje}</p>
-      </center>
-    </div>)
+    return (
+      <div>
+        <center>
+          <h4>Bienvenido: {this.props.getUsername()}</h4>
+          <h2>Realizar Compra</h2>
+          <p>Puedes encontrar un producto por medio de una búsqueda. Escribe el Nombre del producto o el Sku para poder realizar la búsqueda.</p>
+          <p>
+            <input type="text" placeholder="Nombre o Sku del Producto" onChange={this.tomarSkuONombre} onFocus={this.value = ""}/> {contentToShow}
+          </p>
+          {listaCompra}
+          <p>{this.state.mensaje}</p>
+        </center>
+     </div>
+   );
   }
 }
