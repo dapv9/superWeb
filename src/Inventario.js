@@ -6,7 +6,6 @@ import ListaInventario from './ListaInventario.js';
 export default class inventario extends Component{
 	render(){
 		let cadaproducto =[];
-		let boton = [];
 		let termino = null;
 
 		ListaInventario.forEach((inventario) =>{
@@ -15,7 +14,6 @@ export default class inventario extends Component{
 				}
 				termino = inventario.sku;
 			});
-
 
 		return(
 				<center>

@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import ListaVendedores from './ListaVendedores.js'
 import ListaCompradores from './ListaCompradores.js'
 
@@ -9,6 +8,7 @@ export default class Login extends Component {
     this.state = {
       usuario: "",
       contraseña: "",
+      mensaje: ""
     }
     this.tomarUsuario = this.tomarUsuario.bind(this);
     this.tomarContraseña = this.tomarContraseña.bind(this);
@@ -25,26 +25,32 @@ export default class Login extends Component {
 
   checkLogin() {
     for (let vendedor in ListaVendedores) {
-      if(this.state.usuario == ListaVendedores[vendedor].usuario && this.state.contraseña == ListaVendedores[vendedor].contraseña) {
+      if(this.state.usuario === ListaVendedores[vendedor].usuario && this.state.contraseña === ListaVendedores[vendedor].contraseña) {
         this.props.successLogin(this.state.usuario, "seller");
         return;
       }
     }
     for (let comprador in ListaCompradores) {
-      if(this.state.usuario == ListaCompradores[comprador].usuario && this.state.contraseña == ListaCompradores[comprador].contraseña) {
+      if(this.state.usuario === ListaCompradores[comprador].usuario && this.state.contraseña === ListaCompradores[comprador].contraseña) {
         this.props.successLogin(this.state.usuario, "buyer");
         return;
       }
     }
+    this.setState({mensaje: "Las credenciales ingresadas no corresponden"});
   }
 
   render() {
-    return (<div>
-      <center>
-        <p><input type="text" placeholder="Usuario" onChange={this.tomarUsuario} onFocus={this.value = ""}/></p>
-        <p><input type="password" placeholder="Contraseña" onChange={this.tomarContraseña} onFocus={this.value = ""}/></p>
-        <p><input type="button" value="Confirmar Ingreso" onClick={this.checkLogin}/></p>
-      </center>
-    </div>)
+    return (
+      <div>
+        <center>
+            <p><input type="text" placeholder="Usuario" onChange={this.tomarUsuario} onFocus={this.value = ""}/></p>
+            <p><input type="password" placeholder="Contraseña" onChange={this.tomarContraseña} onFocus={this.value = ""}/></p>
+            <p><input type="button" value="Confirmar Ingreso" onClick={this.checkLogin}/></p>
+        </center>
+        <center>
+          <h3>{this.state.mensaje}</h3>
+        </center>
+      </div>
+    );
   }
 }

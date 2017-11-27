@@ -20,7 +20,7 @@ export default class Cuentas extends Component {
 
   render() {
     for (let cuenta in ListaCuentas) {
-      if (ListaCuentas[cuenta].usuario == this.props.getUsername()) {
+      if (ListaCuentas[cuenta].usuario === this.props.getUsername()) {
         this.state.cuentas.push(<MostrarCuentas cuenta={ListaCuentas[cuenta]}/>);
       }
     }
@@ -28,7 +28,7 @@ export default class Cuentas extends Component {
     let transacciones = [];
 
     for (let transaccion in ListaTransacciones) {
-      if (ListaTransacciones[transaccion].cuenta == this.state.cuenta) {
+      if (ListaTransacciones[transaccion].cuenta === this.state.cuenta) {
         transacciones.push(<MostrarTransacciones transaccion={ListaTransacciones[transaccion]}/>);
       }
     }

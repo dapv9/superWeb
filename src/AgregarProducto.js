@@ -1,7 +1,5 @@
 import React, {Component} from 'react';
-import ReactDOM from 'react-dom';
 import ListaInventario from './ListaInventario.js';
-import Login from './Login.js';
 
 export default class agregarProducto extends Component {
   constructor(props) {
@@ -43,14 +41,14 @@ export default class agregarProducto extends Component {
   comprobarSku() {
     let skuAv = true;
     for (let producto in ListaInventario) {
-      if (ListaInventario[producto].sku == this.state.sku) {
+      if (ListaInventario[producto].sku === this.state.sku) {
         this.setState({
           mensaje: "El código " + this.state.sku + " ya está registrado al producto: '" + ListaInventario[producto].nombre + "' y sólo es posible aumentar su cantidad."
         });
         skuAv = false;
       }
     }
-    if (skuAv == true) {
+    if (skuAv === true) {
       this.setState({mensaje: "El código está disponible para ser registrado, puede añadir un nombre al producto, una cantidad y precio por unidad."})
     }
     this.skuAvailable = skuAv;
@@ -76,7 +74,7 @@ export default class agregarProducto extends Component {
     }
     if (!empty2) {
       for (let producto in ListaInventario) {
-        if (ListaInventario[producto].sku == this.state.sku) {
+        if (ListaInventario[producto].sku === this.state.sku) {
           ListaInventario[producto].cantidad = parseInt(this.state.cantidad) + parseInt(ListaInventario[producto].cantidad);
           this.setState({
             mensaje: "Se han aumentado las existencias del producto seleccionado en: " + this.state.cantidad + ". Para un total de " + ListaInventario[producto].cantidad + " unidades del producto."
@@ -88,7 +86,7 @@ export default class agregarProducto extends Component {
 
   render() {
     let contentToShow = null;
-    if (this.skuAvailable == true) {
+    if (this.skuAvailable === true) {
       contentToShow = [
         <p>Nombre:&nbsp;
           <input type="text" placeholder="Nombre del Producto" onChange={this.tomarNombre} onFocus={this.value = ""}/></p>,
@@ -98,7 +96,7 @@ export default class agregarProducto extends Component {
           <input type="text" placeholder="Precio del Producto" onChange={this.tomarPrecio} onFocus={this.value = ""}/></p>,
         <p><input type="button" value="Confirmar" onClick={this.guardarProducto}/></p>
       ]
-    } else if (this.skuAvailable == false) {
+    } else if (this.skuAvailable === false) {
       contentToShow = [
         <p>Cantidad:&nbsp;
           <input type="text" placeholder="Cantidad del Producto" onChange={this.tomarCantidad} onFocus={this.value = ""}/>&nbsp;*mayor a 0</p>,

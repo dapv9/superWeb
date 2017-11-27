@@ -39,7 +39,7 @@ export default class RealizarCompra extends Component {
 
   tomarSkuONombre(e) {
     let skuONombre = e.target.value;
-    if (skuONombre == "") {
+    if (skuONombre === "") {
       this.setState({showProduct: false});
       return;
     }
@@ -82,13 +82,13 @@ export default class RealizarCompra extends Component {
 
   addProduct() {
     for (let producto in ListaInventario) {
-      if (ListaInventario[producto].sku == this.state.sku) {
+      if (ListaInventario[producto].sku === this.state.sku) {
         if (ListaInventario[producto].cantidad >= this.state.cantidadCompra) {
           this.setState({mensaje: "Se añadió el producto exitosamente."});
           this.state.listaCompra.push({nombre: ListaInventario[producto].nombre, sku: ListaInventario[producto].sku, cantidad: this.state.cantidadCompra});
           this.state.valorCompra += (ListaInventario[producto].precio * this.state.cantidadCompra);
           ListaInventario[producto].cantidad -= this.state.cantidadCompra;
-          this.state.cantidad = ListaInventario[producto].cantidad;
+          this.setState({cantidad: ListaInventario[producto].cantidad});
         } else {
           this.setState({mensaje: "No fue posible añadir el producto. Se excedió la cantidad en reserva de dicho producto."});
         }
@@ -118,7 +118,7 @@ export default class RealizarCompra extends Component {
     compra.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
     compra.productList = this.state.listaCompra;
     compra.discountCode = this.state.discountCode;
-    if (compra.discountCode == "") {
+    if (compra.discountCode === "") {
       compra.totalPrice = this.state.valorCompra;
     } else {
       compra.totalPrice = this.state.valorCompra * 0.9;
@@ -148,7 +148,7 @@ export default class RealizarCompra extends Component {
     compra.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
     compra.productList = this.state.listaCompra;
     compra.discountCode = this.state.discountCode;
-    if (compra.discountCode == "") {
+    if (compra.discountCode === "") {
       compra.totalPrice = this.state.valorCompra;
     } else {
       compra.totalPrice = this.state.valorCompra * 0.9;
@@ -165,7 +165,7 @@ export default class RealizarCompra extends Component {
   noBuy() {
     for (let producto in this.state.listaCompra) {
       for (let productoInventario in ListaInventario) {
-        if (this.state.listaCompra[producto].sku == ListaInventario[productoInventario].sku) {
+        if (this.state.listaCompra[producto].sku === ListaInventario[productoInventario].sku) {
           ListaInventario[productoInventario].cantidad += parseInt(this.state.listaCompra[producto].cantidad);
         }
       }
@@ -175,7 +175,7 @@ export default class RealizarCompra extends Component {
 
   showProductList() {
     this.setState({showProduct: !this.state.showProduct});
-    if (this.state.productListMessage == "Mostrar Lista") {
+    if (this.state.productListMessage === "Mostrar Lista") {
       for (let producto in this.state.listaCompra) {
         this.state.productListToShow.push(<MostrarListaCompra producto={this.state.listaCompra[producto]}/>)
         this.setState({productListMessage: "Esconder Lista"});
@@ -196,7 +196,6 @@ export default class RealizarCompra extends Component {
   }
 
   render() {
-    let searchButton = null;
     let contentToShow = null;
     let productListButtons = null;
     let listaCompra = null;

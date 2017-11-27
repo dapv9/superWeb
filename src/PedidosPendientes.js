@@ -25,13 +25,13 @@ export default class PedidosPendientes extends Component {
   }
   addEstado() {
     for(let compra in ListaCompras) {
-      if(ListaCompras[compra].numCompra == this.state.codigo && ListaCompras[compra].deliveryType =="Domicilio" && ListaCompras[compra].deliverySent == false && ListaCompras[compra].buyer == this.props.getUsername()) {
-          if(this.state.opcion == "Aceptar"){
+      if(ListaCompras[compra].numCompra === this.state.codigo && ListaCompras[compra].deliveryType === "Domicilio" && ListaCompras[compra].deliverySent === false && ListaCompras[compra].buyer === this.props.getUsername()) {
+          if(this.state.opcion === "Aceptar"){
             ListaCompras[compra].deliverySent = true;
             ListaCompras[compra].deliveryAccepted = true;
-          } else if (this.state.opcion == "Rechazar") {
+          } else if (this.state.opcion === "Rechazar") {
             for(let inventario in ListaInventario) {
-              if(ListaInventario[inventario].sku == ListaCompras[compra].productList.sku) {
+              if(ListaInventario[inventario].sku === ListaCompras[compra].productList.sku) {
                 ListaInventario[inventario].cantidad = ListaCompras[compra].productList.cantidad + ListaInventario[inventario].cantidad;
               }
             }
@@ -39,9 +39,9 @@ export default class PedidosPendientes extends Component {
             ListaCompras[compra].deliveryAccepted = false;
             ListaCompras[compra].deliveryRejectedReason = this.state.razon;
           }
-          this.state.error = "";
+          this.setState({error: ""});
       } else {
-        this.state.error = "Cambio realizado con exito";
+        this.setState({error: "Cambio realizado con exito"});
       }
     }
   }

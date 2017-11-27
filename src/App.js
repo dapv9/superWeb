@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import logo from './logo.svg';
 import './App.css';
 import Inventario from './Inventario.js';
 import Codigos from './Codigos.js';
@@ -84,10 +83,10 @@ class App extends Component {
     const realizarCompra = <RealizarCompra name="{RealizarCompra}" getUsername={this.getUsername} updatePurchase={this.updatePurchase} getPurchase={this.getPurchase}/>;
     const pedidos = <PedidosPendientes name="{PedidosPendientes}" getUsername ={this.getUsername} getUserType={this.getUserType}/>;
 
-    if(this.getUserType() == ""){
+    if(this.getUserType() === ""){
       buttons = <input type="button" value="Ingresar" onClick={this.updateShowComponent}/>;
     }
-    else if(this.getUserType() == "seller"){
+    else if(this.getUserType() === "seller"){
       buttons = [
         <input type="button" value="Ver Inventario" onClick={this.updateShowComponent}/>,
         <input type="button" value="Agregar Producto" onClick={this.updateShowComponent}/>,
@@ -99,7 +98,7 @@ class App extends Component {
         <input type="button" value="Cerrar Sesión" onClick={this.logout}/>,
       ]
     }
-    else if(this.getUserType() == "buyer"){
+    else if(this.getUserType() === "buyer"){
       buttons = [
         <input type="button" value="Ver Inventario" onClick={this.updateShowComponent}/>,
         <input type="button" value="Realizar Compra" onClick={this.updateShowComponent}/>,
