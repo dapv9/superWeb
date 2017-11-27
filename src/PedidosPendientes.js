@@ -61,14 +61,14 @@ export default class PedidosPendientes extends Component {
     let userTypeContent = null;
     let userContent = null;
     let pedidos = [];
-    if (this.props.getUserType() == "seller") {
+    if (this.props.getUserType() === "seller") {
       userTypeContent = <th>Comprador</th>;
       for (let pedido in ListaCompras) {
         pedidos.push(<MostrarPedidos pedido={ListaCompras[pedido]}/>);
       }
-    } else if (this.props.getUserType() == "buyer") {
+    } else if (this.props.getUserType() === "buyer") {
       for (let pedido in ListaCompras) {
-        if (this.props.getUsername() == ListaCompras[pedido].buyer) {
+        if (this.props.getUsername() === ListaCompras[pedido].buyer) {
           pedidos.push(<MostrarPedidosUsuario pedido={ListaCompras[pedido]}/>);
         }
       }
