@@ -40,11 +40,11 @@ export default class MostrarComprasUsuario extends Component{
 
 		return(
 			<tr>
-				<td>{this.props.compra.numCompra.toString()}</td>
-				<td>{this.props.compra.date.toString()}</td>
-				<td>{this.props.compra.totalPrice.toString()}</td>
-				<td>{this.props.compra.discountCode.toString()}</td>
-				<td>{this.props.compra.deliveryType.toString()}</td>
+				<td>{this.props.compra.numCompra}</td>
+				<td>{this.props.compra.date}</td>
+				<td>{this.props.compra.totalPrice}</td>
+				<td>{this.props.compra.discountCode}</td>
+				<td>{this.props.compra.deliveryType}</td>
 				{showDeliveryInfo}
 			</tr>
 		);

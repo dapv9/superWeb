@@ -9,8 +9,6 @@ export default class RealizarCompra extends Component {
     this.state = {
       listaCompra: this.props.getPurchase().listaCompra,
       valorCompra: this.props.getPurchase().valorCompra,
-      nombreSearch: "",
-      skuSearch: "",
       nombre: "",
       sku: "",
       cantidad: "",
@@ -38,44 +36,55 @@ export default class RealizarCompra extends Component {
   }
 
   tomarSkuONombre(e) {
-    let skuONombre = e.target.value;
-    if (skuONombre === "") {
+    if (e.target.value === "") {
       this.setState({showProduct: false});
       return;
     }
-    if (isNaN(skuONombre)) {
-      this.setState({nombreSearch: skuONombre});
-      this.setState({skuSearch: ""});
-      this.buscarNombre();
+    if (isNaN(e.target.value)) {
+      this.buscarNombre(e.target.value);
       return;
     } else {
-      this.setState({skuSearch: skuONombre});
-      this.setState({nombreSearch: ""});
-      this.buscarSku();
+      this.buscarSku(e.target.value);
       return;
     }
   }
 
-  buscarSku() {
+  buscarSku(Search) {
     for (let producto in ListaInventario) {
-      if (ListaInventario[producto].sku.includes(this.state.skuSearch)) {
+      if (ListaInventario[producto].sku.includes(Search)) {
         this.setState({nombre: ListaInventario[producto].nombre});
         this.setState({precio: ListaInventario[producto].precio});
         this.setState({cantidad: ListaInventario[producto].cantidad});
         this.setState({sku: ListaInventario[producto].sku});
         this.setState({showProduct: true});
+        return;
+      }
+      else{
+        this.setState({nombre: ""});
+        this.setState({precio: ""});
+        this.setState({cantidad: ""});
+        this.setState({sku: ""});
+        this.setState({showProduct: false});
       }
     }
   }
 
-  buscarNombre() {
+  buscarNombre(Search) {
     for (let producto in ListaInventario) {
-      if (ListaInventario[producto].nombre.toUpperCase().includes(this.state.nombreSearch.toUpperCase())) {
+      if (ListaInventario[producto].nombre.toUpperCase().includes(Search.toUpperCase())) {
         this.setState({nombre: ListaInventario[producto].nombre});
         this.setState({precio: ListaInventario[producto].precio});
         this.setState({cantidad: ListaInventario[producto].cantidad});
         this.setState({sku: ListaInventario[producto].sku});
         this.setState({showProduct: true});
+        return;
+      }
+      else{
+        this.setState({nombre: ""});
+        this.setState({precio: ""});
+        this.setState({cantidad: ""});
+        this.setState({sku: ""});
+        this.setState({showProduct: false});
       }
     }
   }
@@ -86,7 +95,7 @@ export default class RealizarCompra extends Component {
         if (ListaInventario[producto].cantidad >= this.state.cantidadCompra) {
           this.setState({mensaje: "Se añadió el producto exitosamente."});
           this.state.listaCompra.push({nombre: ListaInventario[producto].nombre, sku: ListaInventario[producto].sku, cantidad: this.state.cantidadCompra});
-          this.state.valorCompra += (ListaInventario[producto].precio * this.state.cantidadCompra);
+          this.setState({valorCompra: this.state.valorCompra + (ListaInventario[producto].precio * this.state.cantidadCompra)})
           ListaInventario[producto].cantidad -= this.state.cantidadCompra;
           this.setState({cantidad: ListaInventario[producto].cantidad});
         }
@@ -109,9 +118,10 @@ export default class RealizarCompra extends Component {
       buyer: "",
       date: "",
       productList: [],
+      numCompra: 0,
       totalPrice: 0,
       discountCode: "",
-      deliveryType: "CollectService",
+      deliveryType: "Personal",
       deliveryCost: 5000,
       deliverySent: false,
       deliveryAccepted: false,
@@ -120,6 +130,7 @@ export default class RealizarCompra extends Component {
 
     compra.buyer = this.props.getUsername();
     compra.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    compra.numCompra = ListaCompras.length;
     compra.productList = this.state.listaCompra;
     compra.discountCode = this.state.discountCode;
 
@@ -147,7 +158,7 @@ export default class RealizarCompra extends Component {
       productList: [],
       totalPrice: 0,
       discountCode: "",
-      deliveryType: "DeliveryService",
+      deliveryType: "Domicilio",
       deliveryCost: 5000,
       deliverySent: false,
       deliveryAccepted: false,
@@ -205,10 +216,10 @@ export default class RealizarCompra extends Component {
   cleanProductList() {
     this.setState({listaCompra: []});
     this.setState({valorCompra: 0});
-    this.setState({mensaje: ""});
+    this.setState({mensaje: "Se limpio la lista correctamente"});
     this.setState({discountCode: ""});
     this.setState({showProduct: false});
-    this.props.updatePurchase(this.state.listaCompra, this.state.valorCompra);
+    this.props.updatePurchase([], 0);
   }
 
   render() {
@@ -275,7 +286,8 @@ export default class RealizarCompra extends Component {
           <h2>Realizar Compra</h2>
           <p>Puedes encontrar un producto por medio de una búsqueda. Escribe el Nombre del producto o el Sku para poder realizar la búsqueda.</p>
           <p>
-            <input type="text" placeholder="Nombre o Sku del Producto" onChange={this.tomarSkuONombre} onFocus={this.value = ""}/> {contentToShow}
+            <input type="text" placeholder="Nombre o Sku del Producto" onChange={this.tomarSkuONombre} onFocus={this.value = ""}/>
+            {contentToShow}
           </p>
           {listaCompra}
           <p>{this.state.mensaje}</p>

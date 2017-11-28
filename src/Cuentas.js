@@ -38,24 +38,25 @@ export default class Cuentas extends Component {
         <h4>Bienvenido: {this.props.getUsername()}</h4>
         <h3>Cuentas</h3>
         <table className= "App-tablas">
-            <tbody>
-              <select onChange={this.callThis} className="form-control" id="ntype" required>
-                <option value="none">Seleccione una Cuenta...</option>
-                {this.state.cuentas}
-              </select>
-            </tbody>
-          </table>
-          <table className= "App-tablas">
+          <tbody align = "center">
+            <select onChange={this.callThis}>
+              <option value="none">Seleccione una Cuenta...</option>
+              {this.state.cuentas}
+            </select>
+          </tbody>
+        </table>
+        <h3>Transacciones</h3>
+        <table className= "App-tablas">
           <thead>
             <tr>
               <th>Codigo Compra</th>
               <th>Valor Compra</th>
             </tr>
           </thead>
-            <tbody onChange={this.callThis} className="form-control" id="ntype" required>
-                {transacciones}
-            </tbody>
-          </table>
+          <tbody>
+            {transacciones}
+          </tbody>
+        </table>
         </div>
       </center>);
   }

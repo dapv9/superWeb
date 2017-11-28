@@ -50,7 +50,7 @@ export default class Login extends Component {
             <p><input type="button" value="Confirmar Ingreso" onClick={this.checkLogin}/></p>
         </center>
         <center>
-          <h3>{this.state.mensaje}</h3>
+          <h3 className="redtext">{this.state.mensaje}</h3>
         </center>
       </div>
     );

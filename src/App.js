@@ -10,6 +10,7 @@ import Compras from './Compras.js';
 import Cuentas from './Cuentas.js';
 import Domicilios from './Domicilios.js';
 import PedidosPendientes from './PedidosPendientes.js';
+import logo from './logo.png';
 
 class App extends Component {
 
@@ -145,7 +146,14 @@ class App extends Component {
     }
     return (
       <div className="App">
-        <div className="App-header"></div>
+        <div className="App-header">
+          <div>
+            <img align = "left" src={logo} alt="logo"/>
+          </div>
+          <div>
+            <h1 align = "center" margin-top= "500px">Supermercado UdeA</h1>
+          </div>
+        </div>
         <p className="App-intro">
           <p>{buttons}</p>
         </p>
