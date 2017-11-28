@@ -25,15 +25,15 @@ export default class MostrarDomiciliosUsuario extends Component{
 					deliveryAccepted = "No"
 				}
 				showDeliveryInfo = [
-					<td>{this.props.domicilio.numCompra.toString()}</td>,
-					<td>{this.props.domicilio.date.toString()}</td>,
-					<td>{this.props.domicilio.totalPrice.toString()}</td>,
-					<td>{this.props.domicilio.discountCode.toString()}</td>,
-					<td>{this.props.domicilio.deliveryType.toString()}</td>,
+					<td>{this.props.domicilio.numCompra}</td>,
+					<td>{this.props.domicilio.date}</td>,
+					<td>{this.props.domicilio.totalPrice}</td>,
+					<td>{this.props.domicilio.discountCode}</td>,
+					<td>{this.props.domicilio.deliveryType}</td>,
 					<td>{deliveryCost}</td>,
 					<td>{deliverySent}</td>,
 					<td>{deliveryAccepted}</td>,
-					<td>{this.props.domicilio.deliveryRejectedReason.toString()}</td>,
+					<td>{this.props.domicilio.deliveryRejectedReason}</td>,
 				];
 		}
 		return(

@@ -155,6 +155,7 @@ export default class RealizarCompra extends Component {
     const compra = {
       buyer: "",
       date: "",
+      numCompra: "",
       productList: [],
       totalPrice: 0,
       discountCode: "",
@@ -167,6 +168,7 @@ export default class RealizarCompra extends Component {
 
     compra.buyer = this.props.getUsername();
     compra.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+    compra.numCompra = ListaCompras.length;
     compra.productList = this.state.listaCompra;
     compra.discountCode = this.state.discountCode;
 

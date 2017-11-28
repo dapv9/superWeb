@@ -11,10 +11,10 @@ export default class MostrarPedidosUsuario extends Component{
 					deliveryCost = 5000;
 				}
 				showDeliveryInfo = [
-					<td>{this.props.pedido.numCompra.toString()}</td>,
-					<td>{this.props.pedido.date.toString()}</td>,
-					<td>{this.props.pedido.totalPrice.toString()}</td>,
-					<td>{this.props.pedido.discountCode.toString()}</td>,
+					<td>{this.props.pedido.numCompra}</td>,
+					<td>{this.props.pedido.date}</td>,
+					<td>{this.props.pedido.totalPrice}</td>,
+					<td>{this.props.pedido.discountCode}</td>,
 					<td>{deliveryCost}</td>,
 				];
 		}

@@ -5,7 +5,6 @@ export default class MostrarCompras extends Component{
 	render(){
 		let showDeliveryInfo = null;
 		let deliverySent = "";
-		let deliveryAccepted = "";
 		let deliveryCost = this.props.compra.totalPrice * 0.05;
 
 		if(deliveryCost >= 5000){
@@ -22,13 +21,6 @@ export default class MostrarCompras extends Component{
 			deliverySent = "No"
 		}
 
-		if(this.props.compra.deliveryAccepted === true){
-			deliveryAccepted = "Si"
-		}
-		else{
-			deliveryAccepted = "No"
-		}
-
 		showDeliveryInfo = [
 			<td>{deliveryCost}</td>,
 			<td>{deliverySent}</td>
@@ -36,12 +28,12 @@ export default class MostrarCompras extends Component{
 
 		return(
 			<tr>
-					<td>{this.props.compra.buyer.toString()}</td>
-					<td>{this.props.compra.numCompra.toString()}</td>
-					<td>{this.props.compra.date.toString()}</td>
-					<td>{this.props.compra.totalPrice.toString()}</td>
-					<td>{this.props.compra.discountCode.toString()}</td>
-					<td>{this.props.compra.deliveryType.toString()}</td>
+					<td>{this.props.compra.buyer}</td>
+					<td>{this.props.compra.numCompra}</td>
+					<td>{this.props.compra.date}</td>
+					<td>{this.props.compra.totalPrice}</td>
+					<td>{this.props.compra.discountCode}</td>
+					<td>{this.props.compra.deliveryType}</td>
 					{showDeliveryInfo}
 			</tr>
 			);

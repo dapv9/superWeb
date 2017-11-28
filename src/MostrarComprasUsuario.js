@@ -4,7 +4,6 @@ export default class MostrarComprasUsuario extends Component{
 	render(){
 		let showDeliveryInfo = null;
 		let deliverySent = "";
-		let deliveryAccepted = "";
 		let deliveryCost = this.props.compra.totalPrice * 0.05;
 
 		if(this.props.compra.deliveryType === "Domicilio" ){
@@ -24,13 +23,6 @@ export default class MostrarComprasUsuario extends Component{
 		}
 		else{
 			deliverySent = "No"
-		}
-
-		if(this.props.compra.deliveryAccepted === true){
-			deliveryAccepted = "Si"
-		}
-		else{
-			deliveryAccepted = "No"
 		}
 
 		showDeliveryInfo = [
