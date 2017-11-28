@@ -2,11 +2,16 @@ import React, {Component} from 'react';
 import ListaInventario from './ListaInventario.js';
 import ListaCompras from './ListaCompras.js';
 import MostrarListaCompra from './MostrarListaCompra.js';
+import MostrarCuentas from './MostrarCuentas.js';
+import ListaCuentas from './ListaCuentas.js';
+import ListaTransacciones from './ListaTransacciones.js';
 
 export default class RealizarCompra extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      cuenta: "none",
+      cuentas: [],
       listaCompra: this.props.getPurchase().listaCompra,
       valorCompra: this.props.getPurchase().valorCompra,
       nombre: "",
@@ -114,6 +119,10 @@ export default class RealizarCompra extends Component {
       return;
     }
 
+    if(this.state.listaCompra.length < 1){
+      return;
+    }
+
     const compra = {
       buyer: "",
       date: "",
@@ -122,10 +131,16 @@ export default class RealizarCompra extends Component {
       totalPrice: 0,
       discountCode: "",
       deliveryType: "Personal",
-      deliveryCost: 5000,
+      deliveryCost: 0,
       deliverySent: false,
       deliveryAccepted: false,
       deliveryRejectedReason: "",
+    }
+
+    const transaccion = {
+      cuenta: "",
+      valorCompra: 0,
+      numCompra: 0,
     }
 
     compra.buyer = this.props.getUsername();
@@ -134,15 +149,39 @@ export default class RealizarCompra extends Component {
     compra.productList = this.state.listaCompra;
     compra.discountCode = this.state.discountCode;
 
+    transaccion.cuenta = this.state.cuenta;
+    transaccion.numCompra = ListaCompras.length;
+
     if(compra.discountCode === ""){
       compra.totalPrice = this.state.valorCompra;
+      transaccion.valorCompra = this.state.valorCompra;
+
+      for (let cuenta in ListaCuentas) {
+        if (ListaCuentas[cuenta].cuenta === this.state.cuenta && ListaCuentas[cuenta].saldo < compra.totalPrice) {
+          this.setState({mensaje: "Saldo insuficiente escoja otra cuentas"});
+          return;
+        }
+      }
     }
     else{
       compra.totalPrice = this.state.valorCompra * 0.9;
+      transaccion.valorCompra = this.state.valorCompra * 0.9;
+
+      for (let cuenta in ListaCuentas) {
+        if (ListaCuentas[cuenta].cuenta === this.state.cuenta && ListaCuentas[cuenta].saldo < compra.totalPrice) {
+          this.setState({mensaje: "Saldo insuficiente escoja otra cuentas"});
+          return;
+        }
+      }
     }
 
     this.cleanProductList();
     ListaCompras.push(compra);
+    ListaTransacciones.push(transaccion);
+  }
+
+  callThis = (e) => {
+    this.setState({cuenta: e.target.value});
   }
 
   buyDelivery() {
@@ -166,11 +205,20 @@ export default class RealizarCompra extends Component {
       deliveryRejectedReason: "",
     }
 
+    const transaccion = {
+      cuenta: "",
+      valorCompra: 0,
+      numCompra: 0,
+    }
+
     compra.buyer = this.props.getUsername();
     compra.date = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
     compra.numCompra = ListaCompras.length;
     compra.productList = this.state.listaCompra;
     compra.discountCode = this.state.discountCode;
+
+    transaccion.cuenta = this.state.cuenta;
+    transaccion.numCompra = ListaCompras.length;
 
     if (compra.discountCode === "") {
       compra.totalPrice = this.state.valorCompra;
@@ -181,13 +229,30 @@ export default class RealizarCompra extends Component {
 
     if (compra.totalPrice * 0.05 < 5000) {
       compra.deliveryCost = 5000;
+      transaccion.valorCompra = compra.totalPrice + 5000;
+
+      for (let cuenta in ListaCuentas) {
+        if (ListaCuentas[cuenta].cuenta === this.state.cuenta && ListaCuentas[cuenta].saldo < (this.state.valorCompra + 5000)) {
+          this.setState({mensaje: "Saldo insuficiente escoja otra cuentas"});
+          return;
+        }
+      }
     }
     else {
       compra.deliveryCost = compra.totalPrice * 0.05;
+      transaccion.valorCompra = compra.totalPrice + (compra.totalPrice * 0.05);
+
+      for (let cuenta in ListaCuentas) {
+        if (ListaCuentas[cuenta].cuenta === this.state.cuenta && ListaCuentas[cuenta].saldo < (compra.totalPrice + (compra.totalPrice * 0.05))) {
+          this.setState({mensaje: "Saldo insuficiente escoja otra cuentas"});
+          return;
+        }
+      }
     }
 
     this.cleanProductList();
     ListaCompras.push(compra);
+    ListaTransacciones.push(transaccion);
   }
 
   noBuy() {
@@ -225,11 +290,17 @@ export default class RealizarCompra extends Component {
   }
 
   render() {
+    for (let cuenta in ListaCuentas) {
+      if (ListaCuentas[cuenta].usuario === this.props.getUsername()) {
+        this.state.cuentas.push(<MostrarCuentas cuenta={ListaCuentas[cuenta]}/>);
+      }
+    }
+
     let contentToShow = null;
     let productListButtons = null;
     let listaCompra = null;
 
-    if (this.state.listaCompra.length > 0) {
+    if (this.state.listaCompra.length > 0 && this.state.cuenta !== "none") {
       productListButtons = <p>
         <input type="button" value="Añadir a la Compra" onClick={this.addProduct}/>
         <input type="button" value="Comprar Productos (Recogida personal)" onClick={this.buyCollect}/>
@@ -238,7 +309,7 @@ export default class RealizarCompra extends Component {
         <input type="button" value="Vaciar lista de Productos" onClick={this.noBuy}/>
       </p>;
     }
-    else {
+    else if (this.state.cuenta !== "none"){
       productListButtons = <p>
         <input type="button" value="Añadir a la Compra" onClick={this.addProduct}/>
       </p>;
@@ -287,6 +358,15 @@ export default class RealizarCompra extends Component {
           <h4>Bienvenido: {this.props.getUsername()}</h4>
           <h2>Realizar Compra</h2>
           <p>Puedes encontrar un producto por medio de una búsqueda. Escribe el Nombre del producto o el Sku para poder realizar la búsqueda.</p>
+          <h3>Seleccione cuenta con la que realizara la compra</h3>
+          <table className= "App-tablas">
+            <tbody align = "center">
+              <select onChange={this.callThis}>
+                <option value="none">Seleccione una Cuenta...</option>
+                {this.state.cuentas}
+              </select>
+            </tbody>
+          </table>
           <p>
             <input type="text" placeholder="Nombre o Sku del Producto" onChange={this.tomarSkuONombre} onFocus={this.value = ""}/>
             {contentToShow}
